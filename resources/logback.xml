@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<configuration debug="false" scan="false" scanPeriod="30 seconds">
+<configuration debug="false" scan="true" scanPeriod="30 seconds">
     <!-- Context name can be printed using '%contextName' -->
     <contextName>LOG</contextName>
 
@@ -8,17 +8,17 @@
 	
 	<property name="DEFAULT_PATTERN"
 		value="%d{yyyy-MM-dd HH:mm:ss} %-5level [%t] %logger{30} %method:%L %n\t\t  %msg%n" />
-		
+	
 	<!-- [%-10.-10t] main => [main      ]
 	     30.30  => (min, max)
 	    -30.    => left align
 	       .-30 => 30 보다 클 경우 뒤에서 자른다. -->
 	<property name="SIMPLE_PATTERN"
 		value="%d{HH:mm:ss.SSS} %-5level [%t] - %msg%n" />
-		
-	<property name="DEFAULT_PATTERN_FOR_FILE"
-		value="%d{yyyy-MM-dd HH:mm:ss} %-5level [%t] %logger %method:%L %n\t\t  %msg%n" />
-    
+	
+    <property name="DEFAULT_PATTERN_FOR_FILE"
+		value="%d{yyyy-MM-dd HH:mm:ss.SSS}|%.-1level|%15.15t|%-40.40logger{0}|%msg%n" />
+	
 	<property name="DEFAULT_PATTERN_BAK"
 		value="[%date{yyyy-MM-dd HH:mm:ss}] [%level] [%thread] %logger{30} - %message%n" />
     
@@ -26,7 +26,10 @@
     <include file="resources/logback_default_logger.xml"/> 
 
     <!-- 프로젝트에서 사용할 Logger 추가 할 경우 ***************************** --> 
-    
+	<logger name="io.netty.handler.logging.LoggingHandler">
+		<level value="WARN"/>
+	</logger>
+	
     <!-- 공통 로그 -->
     <root>
         <level value="DEBUG"/>
